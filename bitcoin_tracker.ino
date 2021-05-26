@@ -18,27 +18,17 @@ const char* passwd = ""; # SENHA DA REDE WIFI
 
 WiFiClient client;
 HTTPClient http;
-static char respBuffer[4096];
 
 
+#define OLED_RESET -1/
+#define SCREEN_ADDRESS 0x3C
 
-const char request[] =
-  "GET " CD_URL " HTTP/1.1\r\n"
-  "User-Agent: ESP8266/0.1\r\n"
-  "Accept: *\r\n"
-  "Host: " CD_URL "\r\n"
-  "Connection: close\r\n"
-  "\r\n";
-
-
-#define OLED_RESET -1// Reset pin # (or -1 if sharing Arduino reset pin)
-#define SCREEN_ADDRESS 0x3C///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 void printMessage(String value) {
   display.clearDisplay();
-  display.setTextSize(2);             // Normal 1:1 pixel scale
-  display.setTextColor(SSD1306_WHITE);        // Draw white text
+  display.setTextSize(2);             
+  display.setTextColor(SSD1306_WHITE);        
   display.setCursor(0, 0);
 
   display.println("  BTC|USD  ");
@@ -109,6 +99,5 @@ void setup() {
 
 void loop() {
   updateBitcoinValue();
-  
   delay(3000);
 }
